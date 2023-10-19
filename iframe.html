@@ -1,0 +1,37 @@
+<!DOCTYPE html> <html>
+<head>
+    <meta charset="utf-8">
+    <title>子页面</title>
+</head> <body>
+    <h1>子页面</h1>
+    <p>类型: <span id="type"></span></p>
+    <button id="button1">按钮1</button>
+    <button id="button2">按钮2</button>
+    <button id="button3">按钮3</button>
+    <button id="button4">按钮4</button>
+    <button id="button5">按钮5</button>
+    <button id="button6">按钮6</button>
+    <button id="button7">按钮7</button>
+    <button id="button8">按钮8</button>
+    <button id="button9">按钮9</button>
+    <button id="button10">按钮10</button>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        // 获取URL中的类型参数
+        const urlParams = new URLSearchParams(window.location.search); 
+        const type = urlParams.get('type');
+        $('#type').text(type);
+
+        // 按钮点击事件处理程序 
+        $('button').click(function() {
+            // 获取按钮的文本作为消息值 
+            const value = $(this).text();
+            // 发送postMessage消息到父级页面 
+            window.parent.postMessage({
+                type: type,
+                value: value + ' 来自 iframe 的消息' 
+            }, '*');
+        });
+    </script>
+</body> 
+</html>
